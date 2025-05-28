@@ -1,33 +1,13 @@
-from tkinter import Tk, BOTH, Canvas
+from graphics import Window, Line, Point
 
+def main():
+    win = Window(800, 800)
+    line = Line(Point(200,200), Point(600,600))
+    win.draw_line(line)
 
-class Window():
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-
-        self.__root = Tk()
-        self.__root.title = "Title"
-
-        self.canvas = Canvas()
-        self.canvas.pack()
-
-        self.running = False
-
-    def redraw(self):
-        self.__root.update_idletasks()
-        self.__root.update()
-
-    def wait_for_close(self):
-        self.running = True
-        while self.running:
-            self.redraw()
-
-    def close(self):
-        self.running = False
-        self.__root.protocol("WM_DELETE_WINDOW", self.close)
-
+    # This runs the window after settings have been applied.
+    # Window appearance must be determined before this is called.
+    win.wait_for_close()
 
 if __name__ == "__main__":
-    win = Window(800, 800)
-    win.wait_for_close()
+    main()
