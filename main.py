@@ -11,6 +11,8 @@ def main():
     cell2.draw(150, 225, 525, 675)
     cell3 = Cell(win)
     cell3.draw(10, 10, 790, 790)
+    cell.draw_move(cell2)
+    cell.draw_move(cell3, True)
 
     # This runs the window after settings have been applied.
     # Window appearance must be determined before this is called.
