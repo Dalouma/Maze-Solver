@@ -3,7 +3,7 @@ import time
 
 
 class Cell():
-    def __init__(self, window=None):
+    def __init__(self, window: Window = None):
         self.has_left_wall = True
         self.has_right_wall = True
         self.has_top_wall = True
@@ -24,15 +24,26 @@ class Cell():
 
         if self.__win is None:
             return
-
+        # Left Wall
         if self.has_left_wall:
             self.__win.draw_line(Line(Point(x1, y1), Point(x1, y2)))
+        else:
+            self.__win.draw_line(Line(Point(x1, y1), Point(x1, y2)), "white")
+        # Right Wall
         if self.has_right_wall:
             self.__win.draw_line(Line(Point(x2, y1), Point(x2, y2)))
+        else:
+            self.__win.draw_line(Line(Point(x2, y1), Point(x2, y2)), "white")
+        # Top Wall
         if self.has_top_wall:
             self.__win.draw_line(Line(Point(x1, y1), Point(x2, y1)))
+        else:
+            self.__win.draw_line(Line(Point(x1, y1), Point(x2, y1)), "white")
+        # Bottom Wall
         if self.has_bottom_wall:
             self.__win.draw_line(Line(Point(x1, y2), Point(x2, y2)))
+        else:
+            self.__win.draw_line(Line(Point(x1, y2), Point(x2, y2)), "white")
 
     def draw_move(self, to_cell, undo=False):
         color = "gray" if undo else "red"
@@ -66,6 +77,8 @@ class Maze():
         self.__cells = []
         self.__create_cells()
 
+        self.__break_entrance_and_exit()
+
     def __create_cells(self):
         self.__cells = [ [Cell(self.__win) for _ in range(self.__num_rows)] for _ in range(self.__num_cols) ]
         for i in range(self.__num_cols):
@@ -87,3 +100,9 @@ class Maze():
         self.__win.redraw()
         time.sleep(0.01)
         
+    def __break_entrance_and_exit(self):
+        if self.__num_cols > 0:
+            self.__cells[0][0].has_top_wall = False
+            self.__draw_cell(0, 0)
+            self.__cells[-1][-1].has_bottom_wall = False
+            self.__draw_cell(self.__num_cols-1, self.__num_rows-1)

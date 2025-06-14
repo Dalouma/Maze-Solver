@@ -23,6 +23,45 @@ class Tests(unittest.TestCase):
             0,
         )
 
+    def test_break_entrance_exit(self):
+        m1 = Maze(0, 0, 10, 10, 10, 10)
+
+        # Entrance
+        self.assertEqual(
+            m1._Maze__cells[0][0].has_top_wall,
+            False
+        )
+        self.assertEqual(
+            m1._Maze__cells[0][0].has_bottom_wall,
+            True
+        )
+        self.assertEqual(
+            m1._Maze__cells[0][0].has_left_wall,
+            True
+        )
+        self.assertEqual(
+            m1._Maze__cells[0][0].has_right_wall,
+            True
+        )
+
+        # Exit
+        self.assertEqual(
+            m1._Maze__cells[-1][-1].has_top_wall,
+            True
+        )
+        self.assertEqual(
+            m1._Maze__cells[-1][-1].has_bottom_wall,
+            False
+        )
+        self.assertEqual(
+            m1._Maze__cells[-1][-1].has_left_wall,
+            True
+        )
+        self.assertEqual(
+            m1._Maze__cells[-1][-1].has_right_wall,
+            True
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
