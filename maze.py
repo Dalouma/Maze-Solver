@@ -85,6 +85,9 @@ class Maze():
         self.__break_entrance_and_exit()
         if num_cols > 0 and num_rows > 0:
             self.__break_walls_r(0, 0)
+            self.__reset_cells_visited()
+
+        
 
     def __create_cells(self):
         self.__cells = [ [Cell(self.__win) for _ in range(self.__num_rows)] for _ in range(self.__num_cols) ]
@@ -152,4 +155,10 @@ class Maze():
 
             self.__draw_cell(i, j)
             self.__break_walls_r(dir[0], dir[1])
+
+    def __reset_cells_visited(self):
+        for arr in self.__cells:
+            for cell in arr:
+                cell.visited = False
+
 

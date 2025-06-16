@@ -13,7 +13,7 @@ def main():
     # cell3.draw(10, 10, 790, 790)
     # cell.draw_move(cell2)
     # cell.draw_move(cell3, True)
-    maze = Maze(100, 100, 20, 20, 25, 25, win, 0)
+    maze = Maze(100, 100, 20, 20, 25, 25, win)
     maze._animate()
 
     # This runs the window after settings have been applied.
